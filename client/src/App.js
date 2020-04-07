@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const apiURL = 'http://localhost:3001/api/'
+
 class App extends Component {
   state = {
     data: [],
@@ -40,7 +42,7 @@ class App extends Component {
 
   // first get moethod that uses the backend API
   getDataFromDb = () => {
-    fetch('http://localhost:3001/api/getData')
+    fetch(apiURL + 'getData')
     .then((data) => data.json())
     .then((res) => this.setState({ data: res.data }));
   };
@@ -101,10 +103,17 @@ class App extends Component {
     const { data } = this.state;
     return (
       <div>
-        <h2>My App</h2>
+        <div id="header">
+          <div id="imageDiv">
+            <img src="./download.png"></img>
+          </div>
+          <div id="titleDiv">
+            <h2>My Books</h2>
+          </div>
+        </div>
         <ul>
           {data.length <= 0
-            ? 'NO DB ENTRIES YET'
+            ? 'No books yet'
             : data.map((dat) => (
                 <li style={{ padding: '10px' }} key={data.message}>
                   <span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
@@ -121,7 +130,7 @@ class App extends Component {
             style={{ width: '200px' }}
           />
           <button onClick={() => this.putDataToDB(this.state.message)}>
-            ADD
+            Add
           </button>
         </div>
         <div style={{ padding: '10px' }}>
@@ -132,7 +141,7 @@ class App extends Component {
             placeholder="put id of item to delete here"
           />
           <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
-            DELETE
+            Delete
           </button>
         </div>
         <div style={{ padding: '10px' }}>
@@ -153,7 +162,7 @@ class App extends Component {
               this.updateDB(this.state.idToUpdate, this.state.updateToApply)
             }
           >
-            UPDATE
+            Update
           </button>
         </div>
       </div>

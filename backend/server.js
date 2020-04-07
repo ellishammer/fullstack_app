@@ -54,6 +54,13 @@ router.delete('/deleteData', (req, res) => {
 	});
 });
 
+router.delete('/purgeData', (req, res) => {
+	Data.find((err, data) => {
+		if (err) return res.json({ success: false, error: err });
+		// re
+	})
+})
+
 // create method
 router.post('/putData', (req, res) => {
 	let data = new Data();
@@ -78,7 +85,7 @@ router.post('/putData', (req, res) => {
 app.use('/api', router)
 
 // launch backend
-app.listen(API_PORT, () => console.log('LISTENING ON PORT $(API_PORT)'));
+app.listen(API_PORT, () => console.log('LISTENING ON PORT ${API_PORT}'));
 
 // username is username
 // password
