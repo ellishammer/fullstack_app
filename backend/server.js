@@ -58,6 +58,7 @@ router.delete('/purgeData', (req, res) => {
 	Data.find((err, data) => {
 		if (err) return res.json({ success: false, error: err });
 		// re
+		// TODO: finish db purge method
 	})
 })
 
@@ -87,9 +88,7 @@ app.use('/api', router)
 // launch backend
 app.listen(API_PORT, () => console.log('LISTENING ON PORT ${API_PORT}'));
 
-// username is username
-// password
-// flcyYzZjnitdFfEG
+
 
 
 

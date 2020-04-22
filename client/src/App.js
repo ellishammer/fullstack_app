@@ -95,6 +95,11 @@ class App extends Component {
     });
   };
 
+  // empties the database
+  PurgeDB = () => {
+    
+  }
+
 
   // here is our UI
   // it is easy to understand their functions when you
