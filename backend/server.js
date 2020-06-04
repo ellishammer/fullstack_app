@@ -11,11 +11,15 @@ app.use(cors())
 
 const router = express.Router();
 
-// database
 const dbRoute = 'mongodb+srv://username:flcyYzZjnitdFfEG@cluster0-cax6v.mongodb.net/test?retryWrites=true&w=majority';
 
-// connects back end with the db
-mongoose.connect(dbRoute, { useNewUrlParser: true });
+mongoose.connect(
+	dbRoute, 
+	{ 
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+ 	}
+ );
 
 let db = mongoose.connection;
 
@@ -28,7 +32,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'))
 
-// get method for getting data in db
 router.get('/getData', (req, res) => {
 	Data.find((err, data) => {
 		if (err) return res.json({ success: false, error: err });
@@ -36,7 +39,6 @@ router.get('/getData', (req, res) => {
 	});
 });
 
-// update method
 router.post('/updateData', (req, res) => {
 	const { id } = req.body;
 	Data.findByIdAndRemove(id, (err) => {
@@ -45,7 +47,6 @@ router.post('/updateData', (req, res) => {
 	});
 });
 
-// delete method
 router.delete('/deleteData', (req, res) => {
 	const { id } = req.body;
 	Data.findByIdAndRemove(id, (err) => {
@@ -54,15 +55,15 @@ router.delete('/deleteData', (req, res) => {
 	});
 });
 
-router.delete('/purgeData', (req, res) => {
-	Data.find((err, data) => {
-		if (err) return res.json({ success: false, error: err });
-		// re
-		// TODO: finish db purge method
-	})
-})
+// TODO
+// router.delete('/purgeData', (req, res) => {
+// 	Data.find((err, data) => {
+// 		if (err) return res.json({ success: false, error: err });
+// 		// re
+// 		// TODO: finish db purge method
+// 	})
+// })
 
-// create method
 router.post('/putData', (req, res) => {
 	let data = new Data();
 
@@ -82,11 +83,9 @@ router.post('/putData', (req, res) => {
 	});
 });
 
-// append /api for our requests
 app.use('/api', router)
 
-// launch backend
-app.listen(API_PORT, () => console.log('LISTENING ON PORT ${API_PORT}'));
+app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
 
 
