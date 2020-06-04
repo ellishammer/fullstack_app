@@ -4,6 +4,9 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
+const username = require('../config.json').username;
+const password = require('../config.json').password;
+const dbName = require('../config.json').dbName;
 
 const API_PORT = 3001;
 const app = express();
@@ -11,7 +14,7 @@ app.use(cors())
 
 const router = express.Router();
 
-const dbRoute = 'mongodb+srv://username:flcyYzZjnitdFfEG@cluster0-cax6v.mongodb.net/test?retryWrites=true&w=majority';
+const dbRoute = `mongodb+srv://${username}:${password}@cluster0-cax6v.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 mongoose.connect(
 	dbRoute, 
@@ -19,7 +22,8 @@ mongoose.connect(
 		useNewUrlParser: true,
 		useUnifiedTopology: true
  	}
- );
+);
+
 
 let db = mongoose.connection;
 
@@ -27,7 +31,6 @@ db.once('open', () => console.log('connected to the db'));
 
 db.on('error', console.error.bind(console, 'MongoDB connectior error'));
 
-// logging and bodyParser - makes the request easier to read
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'))
@@ -85,7 +88,7 @@ router.post('/putData', (req, res) => {
 
 app.use('/api', router)
 
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
 
 
 

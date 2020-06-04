@@ -24,9 +24,10 @@
     "eslint-plugin-react": "^7.20.0"
   },
   "scripts": {
-    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ellis Hammer",
   "license": "ISC"
 }
