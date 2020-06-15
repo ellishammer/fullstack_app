@@ -14,7 +14,7 @@ app.use(cors())
 
 const router = express.Router();
 
-const dbRoute = `mongodb+srv://${username}:${password}@cluster0-cax6v.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+const dbRoute = `mongodb+srv://${username}:${password}@cluster0-ccrwv.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 mongoose.connect(
 	dbRoute, 
@@ -89,19 +89,3 @@ router.post('/putData', (req, res) => {
 app.use('/api', router)
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-const Template = require('./template');
+import bookLogo from './download.png'
+import background from './background.jpg'
+// const Template = require('./template');
 
 const apiURL = 'http://localhost:3001/api/'
 
@@ -105,9 +107,76 @@ class App extends Component {
 // });
 
   render() {
-    const { tempdata } = this.state;
+    const { data } = this.state;
     return (
-      <Template data={tempdata}/>
+      <div className="temp" style={{backgroundImage: `url(${background})`, display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+        <div style={{backgroundColor: '#FFFFFF', borderRadius: 20, padding: 50}}>
+          <div id="header">
+            <div id="imageDiv">
+              <img src={bookLogo} alt="book logo" style={{height: 50, width: 50}}></img>
+            </div>
+            <div id="titleDiv">
+              <h2>My Books</h2>
+            </div>
+          </div>
+          <div>
+            <ul>
+              {data.length <= 0
+                ? 'No books yet'
+                : data.map((dat) => (
+                    <li style={{ padding: '10px' }} key={data.message}>
+                      <span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
+                      <span style={{ color: 'gray' }}> data: </span>
+                      {dat.message}
+                    </li>
+                  ))}
+            </ul>
+          </div>
+          <div style={{ padding: '10px' }}>
+            <input
+              type="text"
+              onChange={(e) => this.setState({ message: e.target.value })}
+              placeholder="add something in the database"
+              style={{ width: '200px' }}
+            />
+            <button onClick={() => this.putDataToDB(this.state.message)}>
+              Add
+            </button>
+          </div>
+          <div style={{ padding: '10px' }}>
+            <input
+              type="text"
+              style={{ width: '200px' }}
+              onChange={(e) => this.setState({ idToDelete: e.target.value })}
+              placeholder="put id of item to delete here"
+            />
+            <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
+              Delete
+            </button>
+          </div>
+          <div style={{ padding: '10px' }}>
+            <input
+              type="text"
+              style={{ width: '200px' }}
+              onChange={(e) => this.setState({ idToUpdate: e.target.value })}
+              placeholder="id of item to update here"
+            />
+            <input
+              type="text"
+              style={{ width: '200px' }}
+              onChange={(e) => this.setState({ updateToApply: e.target.value })}
+              placeholder="put new value of the item here"
+            />
+            <button
+              onClick={() =>
+                this.updateDB(this.state.idToUpdate, this.state.updateToApply)
+              }
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 }
