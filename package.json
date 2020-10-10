@@ -16,12 +16,12 @@
     "morgan": "^1.10.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.20.0"
+    "eslint-plugin-react": "^7.21.4"
   },
   "scripts": {
     "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
