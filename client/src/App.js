@@ -93,23 +93,23 @@ class App extends Component {
   };
 
 // empties the database
-purgeDB = () => {
-    data = fetch(apiURL + 'getData')
-    .then((data) => data.json())
-    .then((res) => this.setState({ data: res.data }));
+// purgeDB = () => {
+//     data = fetch(apiURL + 'getData')
+//     .then((data) => data.json())
+//     .then((res) => this.setState({ data: res.data }));
 
-    this.state.data.forEach((dataa) => {
-        if (dataa.id === idToDelete) {
-            objIdToDelete = dataa._id;
-        }
+//     this.state.data.forEach((dataa) => {
+//         if (dataa.id === idToDelete) {
+//             objIdToDelete = dataa._id;
+//         }
 
-        axios.delete('http://localhost:3001/api/deleteData', {
-            data: {
-                id: objIdToDelete
-            },
-        });
-    });
-}
+//         axios.delete('http://localhost:3001/api/deleteData', {
+//             data: {
+//                 id: objIdToDelete
+//             },
+//         });
+//     });
+// }
 
 //   module.exports = React.createClass({
 //   render: function() {
